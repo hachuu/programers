@@ -61,28 +61,31 @@ function solution(answers) {
     console.log(correctArray);
     
     let newAnser = [];
-    if ([...new Set(correctArray)].length === 1) {
-        return [1,2,3];
-    } else if ([...new Set(correctArray)].length === 2) {
-        if (correctArray[0] === correct1) {
-            newAnser.push(1);
-        }
-        if (correctArray[0] === correct2) {
-            newAnser.push(2);
-        }
-        if (correctArray[0] === correct3) {
-            newAnser.push(3);
-        }
-    } else {
-        // 중복값 x
-        if (correctArray[0] === correct1) {
-            return [1];
-        } else if (correctArray[0] === correct2) {
-            return [2];
-        } else if (correctArray[0] === correct3){
-            return [3];
-        }
-    }
+    if (correctArray[0] === correct1) newAnser.push(1);
+    if (correctArray[0] === correct2) newAnser.push(2);
+    if (correctArray[0] === correct3) newAnser.push(3);
+//     if ([...new Set(correctArray)].length === 1) {
+//         return [1,2,3];
+//     } else if ([...new Set(correctArray)].length === 2) {
+//         if (correctArray[0] === correct1) {
+//             newAnser.push(1);
+//         }
+//         if (correctArray[0] === correct2) {
+//             newAnser.push(2);
+//         }
+//         if (correctArray[0] === correct3) {
+//             newAnser.push(3);
+//         }
+//     } else {
+//         // 중복값 x
+//         if (correctArray[0] === correct1) {
+//             return [1];
+//         } else if (correctArray[0] === correct2) {
+//             return [2];
+//         } else if (correctArray[0] === correct3){
+//             return [3];
+//         }
+//     }
 
     return newAnser;
 }
