@@ -62,3 +62,13 @@ function findAvailableCheckedValue(sameValues) {
 // 다른 사람 소스.. 충격적이다..
 
 function solution(numbers) { numbers.sort((a, b) => (b.toString() + a.toString()) - (a.toString() + b.toString())); return numbers.join("") == 0 ? "0" : numbers.join(""); }
+
+//sort() : 메서드는 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+
+var numbers = [4, 2, 5, 1, 3];
+numbers.sort(function(a, b) {
+  return a - b;
+});
+console.log(numbers);
+
+// [1, 2, 3, 4, 5]
