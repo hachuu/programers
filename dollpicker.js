@@ -41,6 +41,7 @@ board	moves	result
 	https://programmers.co.kr/learn/courses/30/lessons/64061#
 */
 
+// 내 풀이
 function solution(boards, moves) {
 	const iLength = boards.length;
 	const jLength = moves.length;
@@ -83,6 +84,40 @@ function solution(boards, moves) {
                     }
                         
 				}
+			}
+		}
+	}
+	return disapearCnt;
+}
+
+// 소스 정리한 ver
+
+function solution(boards, moves) {
+	const iLength = boards.length;
+	const jLength = moves.length;
+	let dollTopArray = [];
+	let disapearCnt = 0;
+    let jIdx = 0;
+	loop1: for (let j = 0; j<jLength; j++) {
+		loop2: for(let i = 0; i<iLength; i++ ) {
+            jIdx = moves[j]-1;
+			if (boards[i][jIdx] !== 0) {
+				if (j===0) {
+                    console.log('jIdx의 값 : ', jIdx);
+                    if (boards[i][jIdx] !== 0) {
+                        dollTopArray.push(boards[i][jIdx]);
+                    }
+				} else {
+					if (dollTopArray[dollTopArray.length-1] === boards[i][jIdx]) {
+						dollTopArray.pop();
+						disapearCnt = disapearCnt+2;
+					} else {
+                        dollTopArray.push(boards[i][jIdx]);
+                    }
+                        
+				}
+				boards[i][jIdx] = 0;
+				continue loop1;
 			}
 		}
 	}
