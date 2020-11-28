@@ -1,74 +1,68 @@
-/* 문제
-0 또는 양의 정수가 주어졌을 때, 정수를 이어 붙여 만들 수 있는 가장 큰 수를 알아내 주세요.
+/* 문제 : 큰 수 만들기
 
-예를 들어, 주어진 정수가 [6, 10, 2]라면 [6102, 6210, 1062, 1026, 2610, 2106]를 만들 수 있고, 이중 가장 큰 수는 6210입니다.
+어떤 숫자에서 k개의 수를 제거했을 때 얻을 수 있는 가장 큰 숫자를 구하려 합니다.
 
-0 또는 양의 정수가 담긴 배열 numbers가 매개변수로 주어질 때, 순서를 재배치하여 만들 수 있는 가장 큰 수를 문자열로 바꾸어 return 하도록 solution 함수를 작성해주세요.
+예를 들어, 숫자 1924에서 수 두 개를 제거하면 [19, 12, 14, 92, 94, 24] 를 만들 수 있습니다. 이 중 가장 큰 숫자는 94 입니다.
 
-제한 사항
-numbers의 길이는 1 이상 100,000 이하입니다.
-numbers의 원소는 0 이상 1,000 이하입니다.
-정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
+문자열 형식으로 숫자 number와 제거할 수의 개수 k가 solution 함수의 매개변수로 주어집니다. number에서 k 개의 수를 제거했을 때 만들 수 있는 수 중 가장 큰 숫자를 문자열 형태로 return 하도록 solution 함수를 완성하세요.
+
+제한 조건
+number는 1자리 이상, 1,000,000자리 이하인 숫자입니다.
+k는 1 이상 number의 자릿수 미만인 자연수입니다.
+입출력 예
+number  k   return
+1924    2   94
+1231234 3   3234
+4177252841  4   775841
+
 */
 
-// 시도하다가 실패한 소스
-function solution(numbers) {
-    numbers = numbers.sort((a,b)=>a-b);
-    numbers = numbers.map(String);
-    var answer = '';
-    for (let i=9; i>=0; i--) {
-    let sameValues = [];
-        numbers.map((x,j)=>{
-            const eachValue = x;
-            const firstNum = x.substr(0,1);
-            if (firstNum.indexOf(i.toString()) > -1) {
-                sameValues.push(eachValue);
-            }
-        })
+// 내가 푼 문제
+// 문제 이해를 잘 못했다..
+function solution(number, k) {
+    
+    const arr = number.split('');
+    const newData = arr.sort((a,b)=>b-a).join('');
+    return newData.substr(0, newData.length-k);
+}
 
-        if (sameValues.length === 0) {
-            continue;
-        } else if (sameValues.length === 1) {
-            answer += sameValues[0];
-            numbers.splice(numbers.indexOf(sameValues[0]), 1);
-        } else {
-            const selectedNumber = findAvailableCheckedValue(sameValues);
-            answer += selectedNumber;
-            numbers.splice(numbers.indexOf(selectedNumber), 1);
-            i = i+1;
+
+// 다른 사람 풀이
+// javascript stack 의 로직을 확인 해봐야겠다..
+// 레벨 2올렸다고 금방 쫄아버리다니..
+function solution(number, k) {
+    var stack = []; // b : 최종 글자들이 저장될 스택 (숫자가 큰!)
+    for (var i = 0; i < number.length; i++) { // 모든 숫자 비교
+        var now = number[i]; // 현재 인덱스 숫자. 처음에는 그냥 push
+        
+        // 무조건 push 하고 다음 for 문에서 이전인덱스 숫자와 나랑 비교해서 현재인덱스가 이전인덱스보다 크면 pop하고 넣어줌. 제거하는 숫자인 (k)를 1 감소
+        // 제거할 숫자를 다 채웠으면 그냥 넣음
+        while (k > 0 && stack[stack.length - 1] < now) {
+            stack.pop();
+            k--;
         }
+        stack.push(now);
     }
+    // k가 0일 경우 스택은 그대로,
+    // but k가 남아있으면 뒤에서부터 제거해준다. (ex. 1010,2 -> 11)
+    stack.splice(stack.length - k, k);
+    var answer = stack.join('');
+    
     return answer;
 }
 
-function findAvailableCheckedValue(sameValues) {
-    return sameValues.reduce(function(a, b) {
-
-        if (a.length === 1) {
-            return a;
-        } else if (a.length < b.length) {
-            return b;
-        } else if (a.length === b.length) {
-
-            return a > b ? a : b;
-        } else {
-
-            return b;
+// 다른 사람 풀이 2
+function solution(number, k) {
+    var b = [];
+    for (var i = 0; i < number.length; i++) {
+        var c = number[i];
+        while (k > 0 && b.length > 0 && b[b.length - 1] < c) {
+            b.pop();
+            k--;
         }
-        
-    })
+        b.push(c);
+    }
+    b.splice(b.length - k, k);
+    var answer = b.join('');
+    return answer;
 }
-
-// 다른 사람 소스.. 충격적이다..
-
-function solution(numbers) { numbers.sort((a, b) => (b.toString() + a.toString()) - (a.toString() + b.toString())); return numbers.join("") == 0 ? "0" : numbers.join(""); }
-
-//sort() : 메서드는 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
-
-var numbers = [4, 2, 5, 1, 3];
-numbers.sort(function(a, b) {
-  return a - b;
-});
-console.log(numbers);
-
-// [1, 2, 3, 4, 5]
