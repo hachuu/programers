@@ -23,6 +23,7 @@ function solution(arr1, arr2) {
 }
 
 // 다른 사람 풀이
+// 2중 map..
 function sumMatrix(A,B){
     return A.map((a,i) => a.map((b, j) => b + B[i][j]));
 }
