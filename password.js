@@ -20,7 +20,7 @@ function solution(s, n) {
         	if (x === ' ') {
         		return ' ';
         	} else {
-        		const curIdx = x.charCodeAt(x);
+        		const curIdx = x.charCodeAt(0);
         		return String.fromCharCode( curIdx > 90 ? (curIdx+n-97)%26+97 : (curIdx+n-65)%26+65);
         	}
         }
