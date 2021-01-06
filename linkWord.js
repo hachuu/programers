@@ -61,7 +61,8 @@ n   words   result
 2번 사람 : one, never, world
 와 같은 순서로 말을 하게 되며, 1번 사람이 자신의 세 번째 차례에 'r'로 시작하는 단어 대신, n으로 시작하는 now를 말했기 때문에 이때 처음 탈락자가 나오게 됩니다.
 */
-// 내 풀이 (17, 19, 20 실패)
+// 내 풀이 (17, 19, 20 실패 => 올림처리로 성공)
+// const gameNumber = Math.ceil((index+1)/n);로 변경
 function solution(n, words) {
     const origin = JSON.parse(JSON.stringify(words));
     
@@ -79,7 +80,7 @@ function solution(n, words) {
                 }
             }
         })
-        const gameNumber = (index+1)/n;
+        const gameNumber = Math.ceil((index+1)/n);
         const ordering = (index+1)%n;
         if (ordering === 0) {
             return [n,  gameNumber];
