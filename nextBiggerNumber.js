@@ -46,3 +46,17 @@ function solution(n) {
 function solution(n,a=n+1) {
     return n.toString(2).match(/1/g).length == a.toString(2).match(/1/g).length ? a : solution(n,a+1);
 }
+
+// 수정본
+function solution(n) {
+    const a = n.toString(2).length;
+    const b = n.toString(2).split('').filter(x=>x==='1').length;
+
+    let newNum;
+    let c;
+    while(b!==c) {
+        newNum = ++n;
+        c = newNum.toString(2).split('').filter(x=>x==='1').length;
+    }
+    return newNum;
+}
