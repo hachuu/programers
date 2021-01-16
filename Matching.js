@@ -25,7 +25,10 @@ cdcd	0
 */
 
 // 내가 푼 문제..
-// 재귀로 풀어보려고 했는데 어떻게 꼬인건지 모르겠다.. push pop으로 다시 손을 봐야겠다
+// 재귀로 풀어보려고 했는데 처참한 결과를 맛보았다.
+// 정확성: 30.3
+// 효율성: 0.0
+// 합계: 30.3 / 100.0
 function solution(s)
 {
     function spliceArr(arr) {
@@ -47,7 +50,7 @@ function solution(s)
             returnVal = 1;
             return returnVal;
         } else {
-            spliceArr(arr);
+            return spliceArr(arr);
         }
     }
     const arr = s.split('');
@@ -55,7 +58,7 @@ function solution(s)
     return answer;
 }
 
-// 다시 푼 문제: 스택개념으로 문제에 접근하면 간단하게 풀 수 있다.
+// 다시 푼 문제
 function solution(s) {
 	const arr = s.split('');
 	const stack = [];
