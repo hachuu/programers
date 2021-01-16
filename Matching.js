@@ -55,6 +55,21 @@ function solution(s)
     return answer;
 }
 
+// 다시 푼 문제: 스택개념으로 문제에 접근하면 간단하게 풀 수 있다.
+function solution(s) {
+	const arr = s.split('');
+	const stack = [];
+	for (let i=0; i<arr.length; i++) {
+        const x = arr[i];
+        if (stack.length === 0 || stack[stack.length - 1] !== x) {
+            stack.push(x);
+        } else {
+        	stack.pop();
+        }
+    }
+    return stack.length === 0 ? 1 : 0;
+}
+
 // 다른 사람이 푼 문제
 const solution = (s) => {
   const stack = [];
