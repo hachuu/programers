@@ -73,32 +73,32 @@ No.	0	1	2
 function solution(scores) {
 
     function levelOfVal(score) {
-      const index = score.toString().substr(0,1);
-      const grade = ['F', 'F', 'F', 'F', 'F', 'D', 'D', 'C', 'B', 'A'];
-      return grade[index];
+      const indexOfScore = score.toString().substr(0,1);
+      const grades = ['F', 'F', 'F', 'F', 'F', 'D', 'D', 'C', 'B', 'A'];
+      return grades[indexOfScore];
     }
 
     const range = (n) => Array.apply(null, { length: n }).map((_, i) => i);
     const counts = scores.length;
-    const matrix = range(counts).map((x,i)=>scores.map((av,j) =>av[i]));
-    const sorted = matrix.map(m=>m.sort((a,b)=>b-a));
+    const arrangedMatrix = range(counts).map((x,i)=>scores.map((score,j) =>score[i]));
+    const descScores = arrangedMatrix.map(m=>m.sort((a,b)=>b-a));
 
     let result = [];
 
     let aver;
 
-    for (let i=0; i<sorted.length; i++) {
-        if (sorted[i][0] !== scores[i][i] && sorted[i][counts-1] !== scores[i][i]) {
-        	aver = sorted[i].reduce((acc, cur) => acc+cur)/counts;
+    descScores.forEach((descScore, i) => {
+        if (descScore[0] !== scores[i][i] && descScore[counts-1] !== scores[i][i]) {
+        	aver = descScores[i].reduce((acc, cur) => acc+cur)/counts;
         } else {
-            if (sorted[i].filter(x=> x===scores[i][i]).length > 1) {
-            	aver = sorted[i].reduce((acc, cur) => acc+cur)/counts;
+            if (descScore.filter(x=> x===scores[i][i]).length > 1) {
+            	aver = descScore.reduce((acc, cur) => acc+cur)/counts;
             } else {
-	        	aver = (sorted[i].reduce((acc, cur) => acc+cur) - scores[i][i])/(counts-1);
+	        aver = (descScore.reduce((acc, cur) => acc+cur) - scores[i][i])/(counts-1);
             }
         }
         result.push(levelOfVal(aver));
-    }
+    });
     return result.join("");
 }
 ```
