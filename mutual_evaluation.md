@@ -73,8 +73,9 @@ No.	0	1	2
 function solution(scores) {
 
     function levelOfVal(score) {
-      const indexOfScore = score.toString().substr(0,1);
-      const grades = ['F', 'F', 'F', 'F', 'F', 'D', 'D', 'C', 'B', 'A'];
+      const indexOfScore = score.toString().substr(0, score.toString().length-1);
+      console.log(indexOfScore);
+      const grades = ['F', 'F', 'F', 'F', 'F', 'D', 'D', 'C', 'B', 'A', 'A'];
       return grades[indexOfScore];
     }
 
@@ -93,7 +94,7 @@ function solution(scores) {
         } else {
         	aver = descScore.reduce((acc, cur) => acc+cur)/studentsNum;
         }
-        result.push(levelOfVal(aver));
+        result.push(levelOfVal(~~aver));
     });
     return result.join("");
 }
