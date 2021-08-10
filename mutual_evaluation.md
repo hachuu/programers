@@ -78,9 +78,8 @@ function solution(scores) {
       return grades[indexOfScore];
     }
 
-    const range = (n) => Array.apply(null, { length: n }).map((_, i) => i);
-    const counts = scores.length;
-    const arrangedMatrix = range(counts).map((x,i)=>scores.map((score,j) =>score[i]));
+    const studentsNum = scores.length;
+    const arrangedMatrix = new Array(studentsNum).fill(1).map((x,i)=>scores.map((score,j) =>score[i]));
     const descScores = arrangedMatrix.map(m=>m.sort((a,b)=>b-a));
 
     let result = [];
@@ -88,14 +87,11 @@ function solution(scores) {
     let aver;
 
     descScores.forEach((descScore, i) => {
-        if (descScore[0] !== scores[i][i] && descScore[counts-1] !== scores[i][i]) {
-        	aver = descScores[i].reduce((acc, cur) => acc+cur)/counts;
+    	
+        if ((descScore[0] === scores[i][i] || descScore[studentsNum-1] === scores[i][i]) && descScore.filter(x=> x===scores[i][i]).length === 1) {
+        	aver = (descScore.reduce((acc, cur) => acc+cur) - scores[i][i])/(studentsNum-1);
         } else {
-            if (descScore.filter(x=> x===scores[i][i]).length > 1) {
-            	aver = descScore.reduce((acc, cur) => acc+cur)/counts;
-            } else {
-	        aver = (descScore.reduce((acc, cur) => acc+cur) - scores[i][i])/(counts-1);
-            }
+        	aver = descScore.reduce((acc, cur) => acc+cur)/studentsNum;
         }
         result.push(levelOfVal(aver));
     });
