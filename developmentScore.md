@@ -65,8 +65,8 @@ function solution(table, languages, preference) {
 			(lang,i) => {
 			return tables[elIdx].map((el, j) => {
 				return el === lang && ((6-j) * preference[i])
-			}).reduce((arr,cur)=>arr+cur, 0)
-		}).reduce((arr,cur,i)=>arr+cur, 0)
+			}).reduce((arr,cur)=>arr+cur)
+		}).reduce((arr,cur)=>arr+cur)
 	});
 	return languageSum.map((sum, i) => { return sum == Math.max(...languageSum) && tables[i][0]}).sort()[0];
 }
