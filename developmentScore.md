@@ -1,4 +1,4 @@
-# 직업군 추천하기
+# [직업군 추천하기](https://programmers.co.kr/learn/courses/30/lessons/84325?language=javascript)
 문제 설명
 개발자가 사용하는 언어와 언어 선호도를 입력하면 그에 맞는 직업군을 추천해주는 알고리즘을 개발하려고 합니다.
 
