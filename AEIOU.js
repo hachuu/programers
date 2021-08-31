@@ -38,6 +38,11 @@ word	result
 
 */
 
+// 각 자리수를 소수점으로 계산하여 0.1 부터 0.55555로 계산 총 55555개
+// 1,2,3,4,5만 포함해야하므로 각 자리수의 값을 split하여 6보다 작고 0이 아닌 경우로 filter 걸어주었다. fil.split('').every(s => +s < 6 && +s !== 0)
+// 위에서 변환 시킨 array를 오름차순으로 sort 시킨다
+// 입력한 알파벳을 소수점으로 변환시켰다 wordToDP
+// 0.1~0.55555 숫자 중 wordToDP의 순번을 return 시킨다
 function solution(word) {
     const obj = {
         A:1, E:2, I:3, O:4, U:5
