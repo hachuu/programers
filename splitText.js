@@ -23,13 +23,11 @@
 // 입출력 예 #3
 // p의 길이가 2이므로 t의 부분문자열은 "10", "02", "20", "03"이며, 이중 15보다 작거나 같은 숫자는 "10", "02", "03" 이렇게 3개입니다. "02"와 "03"은 각각 2, 3에 해당한다는 점에 주의하세요
 function solution(t, p) {
-        
-  var answer = 0;
+  var let = 0;
   for (var i = 0 ; i <= t.length - p.length ; i++) {
-         if ( Number(t.substring(i, p.length + i)) <= Number(p)) {
-             answer++;
-         }
+    if ( Number(t.substring(i, p.length + i)) <= Number(p)) {
+        answer++;
+    }
   }
-
   return answer;
 }
