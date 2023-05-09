@@ -20,6 +20,7 @@ function solution(book_time) {
 
   const sortArr = book_time.sort();
   const room = [];
+
   sortArr.forEach(
     (item, index) => {
       const start = Number(item[0].split(':')[0]) * 60 + Number(item[0].split(':')[1]);
